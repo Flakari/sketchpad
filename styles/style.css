@@ -1,0 +1,47 @@
+div {
+  margin: 0;
+  padding: 0;
+}
+
+p {
+  font-size: 3em;
+}
+
+#sketchpad {
+  border-radius: 5px;
+  padding: 0;
+  width: 600px;
+  height: 600px;
+  font-size: 0;
+  margin: auto;
+}
+
+.sketchpad-pixel {
+  background-color: #e6e6e6;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+
+#container {
+  border-radius: 25px;
+  width: 850px;
+  height: auto;
+  margin: auto;
+  background-color: #d0d0d0;
+}
+
+#color-container {
+  float:right;
+  position: relative;
+  top: -482px;
+  width: 125px;
+}
+
+#color-container > button {
+  display: block;
+  margin: auto;
+  width: 80px;
+  margin-top: 24px;
+}
