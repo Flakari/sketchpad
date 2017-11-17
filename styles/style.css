@@ -1,3 +1,7 @@
+html {
+  height: 750px;
+}
+
 div {
   margin: 0;
   padding: 0;
@@ -30,6 +34,7 @@ p {
   height: auto;
   margin: auto;
   background-color: #d0d0d0;
+  margin-top: 20px;
 }
 
 #color-container {
@@ -44,4 +49,36 @@ p {
   margin: auto;
   width: 80px;
   margin-top: 24px;
+}
+
+#canvas-button-container {
+  float: left;
+  position: relative;
+  top: -482px;
+  width: 125px;
+}
+
+#canvas-button-container > button {
+  display: block;
+  margin: auto;
+  width: 80px;
+  margin-top: 24px;
+}
+
+#title {
+  margin: auto;
+  display: block;
+  width: 576px;
+  height: 80px;
+}
+
+#title-container {
+  width: 850px;
+  margin: auto;
+  margin-top:20px;
+}
+
+.title-pixel {
+  display: inline-block;
+  float: left;
 }
