@@ -38,9 +38,20 @@ $(document).ready(function() {
   }());
 
   $('.title-pixel').on('mouseenter', function() {
-    $(this).css({'visibility': 'hidden'});
+    $(this).addClass('hidden');
   });
 
+  $('#title-reset').click(function() {
+    $('.title-pixel').removeClass('hidden');
+  });
+
+  $('#title-button').on('mouseenter', function() {
+      $('#title-reset').removeClass('hidden');
+    });
+
+  $('#title-button').on('mouseleave', function() {
+    $('#title-reset').addClass('hidden');
+  });
 
   $('#canvas-size').click(function() {
     pixelPrompt = prompt("Please specify # of pixels desired horizontally and vertically. (Choose 1-100)");
@@ -57,7 +68,6 @@ $(document).ready(function() {
         }
 
         $('.sketchpad-pixel').css({"width": "calc(100% / " + pixelDensity + ")", "height": "calc(100% / " + pixelDensity + ")"});
-          pixelColor = blackPixel();
       }());
       console.log(pixelDensity);
     }
@@ -101,6 +111,12 @@ $(document).ready(function() {
     })
   }
 
+  function greyPixel() {
+    $('.sketchpad-pixel').on('mouseenter', function() {
+      $(this).css({'background-color': '#e6e6e6'});
+    })
+  }
+
   let pixelColor = blackPixel();
 
   $('#black-pixel').click(function() {
@@ -125,5 +141,6 @@ $(document).ready(function() {
 
   $('#clear').click(function() {
     $('.sketchpad-pixel').css({'background-color': '#e6e6e6'});
+    pixelColor = greyPixel();
   })
 });
