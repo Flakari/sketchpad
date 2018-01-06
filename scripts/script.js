@@ -22,10 +22,11 @@ function pixelChange() {
   }
   let sketchpadPixel = document.querySelectorAll('.sketchpad-pixel');
   console.log(sketchpadPixel);
+  let pixelColor = blackPixel();
 
   sketchpadPixel.forEach(square => {
     square.addEventListener('mouseenter', function(e) {
-      console.log(e.target);
+      e.target.style.backgroundColor = pixelColor;
     });
   });
 }
@@ -36,7 +37,6 @@ function titleChange() {
     let titlePixel = document.createElement('div');
     titlePixel.classList.add('title-pixel');
     title.appendChild(titlePixel);
-    titlePixel.style.cssText = 'width: 16px; height: 16px';
   }
 }
 
@@ -98,18 +98,15 @@ sketchpadPixel.forEach(square => {
   });
 });
 
-/*
+
   $('.sketchpad-pixel').on('mouseenter', function() {
     pixelColor;
-  });
+
   function rainbowPixel() {
     function rgbRandom() {
       return Math.floor(Math.random()*256);
     }
-
-    $('.sketchpad-pixel').on('mouseenter', function() {
-      $(this).css({'background-color': 'rgb(' + rgbRandom() + ',' + rgbRandom() + ',' + rgbRandom() + ')'})
-    });
+    return 'rgb(' + rgbRandom() + ', ' + rgbRandom() + ', ' + rgbRandom() + ')'
   }
 
   function redPixel() {
@@ -129,9 +126,9 @@ sketchpadPixel.forEach(square => {
       $(this).css({'background-color': 'rgb(0,225,0)'});
     })
   }
-
+*/
   function blackPixel() {
-    this.style.cssText = 'background-color: black';
+    return 'black';
   }
 /*
   function greyPixel() {
