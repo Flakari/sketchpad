@@ -6,6 +6,7 @@ let pixelDensity = 16;
 let pixelPrompt = 1;
 let sketchpad = document.querySelector('#sketchpad');
 let title = document.querySelector('#title');
+let color = 'black';
 
 window.onload = function() {
   pixelChange();
@@ -22,10 +23,23 @@ function pixelChange() {
   }
   let sketchpadPixel = document.querySelectorAll('.sketchpad-pixel');
   console.log(sketchpadPixel);
-  let pixelColor = blackPixel();
 
+  let pixelColor = blackPixel();
   sketchpadPixel.forEach(square => {
     square.addEventListener('mouseenter', function(e) {
+      if (color == 'rainbow') {
+        pixelColor = rainbowPixel();
+      } else if (color == 'black') {
+        pixelColor = blackPixel();
+      } else if (color == 'red') {
+        pixelColor = redPixel();
+      } else if (color == 'blue') {
+        pixelColor = bluePixel(); 
+      } else if (color == 'green') {
+        pixelColor = greenPixel();
+      } else {
+        pixelColor = greyPixel();
+      }
       e.target.style.backgroundColor = pixelColor;
     });
   });
@@ -89,76 +103,65 @@ function titleChange() {
     }
   });
 */
-/*let pixelColor = blackPixel();
 
-sketchpadPixel.forEach(square => {
-  square.addEventListener('mouseenter', function(e) {
-    pixelColor;
-    console.log(e.target);
-  });
+function redPixel() {
+  return 'rgb(255,0,0)';
+}
+
+function bluePixel() {
+  return 'rgb(0,0,255)';
+}
+
+function greenPixel() {
+  return 'rgb(0,225,0)';
+}
+
+function blackPixel() {
+  return 'black';
+}
+
+function rainbowPixel() {
+  function rgbRandom() {
+    return Math.floor(Math.random()*256);
+  }
+  return 'rgb(' + rgbRandom() + ', ' + rgbRandom() + ', ' + rgbRandom() + ')'
+}
+
+function greyPixel() {
+  return '#e6e6e6';
+}
+
+let blackPixelButton = document.getElementById('black-pixel');
+blackPixelButton.addEventListener('click', function(e) {
+  color = 'black';
+});
+
+let rainbowPixelButton = document.getElementById('rainbow');
+rainbowPixelButton.addEventListener('click', function(e) {
+  color = 'rainbow';
 });
 
 
-  $('.sketchpad-pixel').on('mouseenter', function() {
-    pixelColor;
+let redPixelButton = document.getElementById('red-pixel');
+redPixelButton.addEventListener('click', function(e) {
+  color = 'red';
+});
 
-  function rainbowPixel() {
-    function rgbRandom() {
-      return Math.floor(Math.random()*256);
-    }
-    return 'rgb(' + rgbRandom() + ', ' + rgbRandom() + ', ' + rgbRandom() + ')'
-  }
+let bluePixelButton = document.getElementById('blue-pixel');
+bluePixelButton.addEventListener('click', function(e) {
+  color = 'blue';
+});
 
-  function redPixel() {
-    $('.sketchpad-pixel').on('mouseenter', function() {
-      $(this).css({'background-color': 'rgb(255,0,0)'});
-    })
-  }
+let greenPixelButton = document.getElementById('green-pixel');
+greenPixelButton.addEventListener('click', function(e) {
+  color = 'green';
+});
 
-  function bluePixel() {
-    $('.sketchpad-pixel').on('mouseenter', function() {
-      $(this).css({'background-color': 'rgb(0,0,255)'});
-    })
-  }
-
-  function greenPixel() {
-    $('.sketchpad-pixel').on('mouseenter', function() {
-      $(this).css({'background-color': 'rgb(0,225,0)'});
-    })
-  }
-*/
-  function blackPixel() {
-    return 'black';
-  }
-/*
-  function greyPixel() {
-    $('.sketchpad-pixel').on('mouseenter', function() {
-      $(this).css({'background-color': '#e6e6e6'});
-    })
-  }
-*/
-/*
-  $('#black-pixel').click(function() {
-    pixelColor = blackPixel();
-  });
-
-  $('#rainbow').click(function() {
-    pixelColor = rainbowPixel();
-  });
-
-  $('#red-pixel').click(function() {
-    pixelColor = redPixel();
-  })
-
-  $('#blue-pixel').click(function() {
-    pixelColor = bluePixel();
-  })
-
-  $('#green-pixel').click(function() {
-    pixelColor = greenPixel();
-  })
-
-  $('#clear').click(function() {
-    $('.sketchpad-pixel').css({'background-color': '#e6e6e6'});
-    pixelColor = greyPixel();
-  })*/
+let clearButton = document.getElementById('clear');
+clearButton.addEventListener('click', function(e) {
+  while (sketchpad.firstChild) {
+    sketchpad.removeChild(sketchpad.firstChild);
+}
+  pixelChange();
+  color = 'grey';
+});
