@@ -1,11 +1,10 @@
-console.log("Javascript is functional");
-console.log(16 * 16);
-
 const titleDensity = 36;
 let pixelDensity = 16;
 let pixelPrompt = 1;
 let sketchpad = document.querySelector('#sketchpad');
 let title = document.querySelector('#title');
+let titleResetArea = document.querySelector('#title-button');
+let titleReset = document.querySelector('#title-reset');
 let color = 'black';
 
 window.onload = function() {
@@ -22,9 +21,8 @@ function pixelChange() {
     sketchpadPixel.style.cssText = 'width: calc(100% / ' + pixelDensity + '); height: calc(100% / ' + pixelDensity + ')';
   }
   let sketchpadPixel = document.querySelectorAll('.sketchpad-pixel');
-  console.log(sketchpadPixel);
-
   let pixelColor = blackPixel();
+  
   sketchpadPixel.forEach(square => {
     square.addEventListener('mouseenter', function(e) {
       if (color == 'rainbow') {
@@ -52,57 +50,51 @@ function titleChange() {
     titlePixel.classList.add('title-pixel');
     title.appendChild(titlePixel);
   }
-}
-
-/*
-//Title creation function
-(function writeTitle() {
+  let titlePixelSelector = document.querySelectorAll('.title-pixel');
+  
   let arr = [0,1,2,4,6,8,9,10,12,13,14,16,17,18,20,22,25,26,27,29,30,31,33,34,36,40,42,44,49,52,56,58,61,63,65,67,69,71,72,73,74,76,77,80,81,82,85,88,92,93,94,97,98,99,101,102,103,105,107,110,112,114,116,121,124,128,130,133,137,139,141,143,144,145,146,148,150,152,153,154,157,160,161,162,164,166,169,173,175,177,178];
-
-  let elem = $('.title-pixel');
-
+  
   for (let i = 0; i < arr.length; i++) {
     j = arr[i];
-    $(elem[j]).css({'background-color': 'black'});
+    titlePixelSelector[j].style.backgroundColor = 'black';
   }
-}());
 
-  $('.title-pixel').on('mouseenter', function() {
-    $(this).addClass('hidden');
-  });
-
-  $('#title-reset').click(function() {
-    $('.title-pixel').removeClass('hidden');
-  });
-
-  $('#title-button').on('mouseenter', function() {
-      $('#title-reset').removeClass('hidden');
+  titlePixelSelector.forEach(square => {
+    square.addEventListener('mouseenter', function(e) {
+      e.target.classList.add('hidden');
     });
-
-  $('#title-button').on('mouseleave', function() {
-    $('#title-reset').addClass('hidden');
   });
 
-  $('#canvas-size').click(function() {
-    pixelPrompt = prompt("Please specify # of pixels desired horizontally and vertically. (Choose 1-100)");
+  titleReset.addEventListener('click', function(e) {
+    titlePixelSelector.forEach(square => {
+      square.classList.remove('hidden');
+    });
+  });
+}
 
-    if (pixelPrompt > 100 || pixelPrompt < 1) {
-      alert("Must be between 1-100.")
+titleResetArea.addEventListener('mouseenter', function(e) {
+  titleReset.classList.remove('hidden');
+});
+
+
+titleResetArea.addEventListener('mouseleave', function(e) {
+  titleReset.classList.add('hidden');
+});
+
+let canvasSize = document.getElementById('canvas-size');
+canvasSize.addEventListener('click', function(e) {
+  pixelPrompt = prompt("Please specify # of pixels desired horizontally and vertically. (Choose 1-100)");
+
+  if (pixelPrompt > 100 || pixelPrompt < 1) {
+    alert("Must be between 1-100.");
     } else {
       pixelDensity = pixelPrompt;
-      $('.sketchpad-pixel').remove();
-
-      (function pixelChange() {
-        for (let i = 0; i < (pixelDensity * pixelDensity); i++) {
-          $('#sketchpad').append("<div class='sketchpad-pixel'></div>");
-        }
-
-        $('.sketchpad-pixel').css({"width": "calc(100% / " + pixelDensity + ")", "height": "calc(100% / " + pixelDensity + ")"});
-      }());
-      console.log(pixelDensity);
-    }
-  });
-*/
+      while (sketchpad.firstChild) {
+        sketchpad.removeChild(sketchpad.firstChild);
+      }
+      pixelChange();
+  }
+});
 
 function redPixel() {
   return 'rgb(255,0,0)';
@@ -159,9 +151,9 @@ greenPixelButton.addEventListener('click', function(e) {
 
 let clearButton = document.getElementById('clear');
 clearButton.addEventListener('click', function(e) {
-  while (sketchpad.firstChild) {
-    sketchpad.removeChild(sketchpad.firstChild);
-}
-  pixelChange();
+  let sketchpadPixel = document.querySelectorAll('.sketchpad-pixel');
+  sketchpadPixel.forEach(square => {
+    square.style.backgroundColor = greyPixel();
+  });
   color = 'grey';
 });
